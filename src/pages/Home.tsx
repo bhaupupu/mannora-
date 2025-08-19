@@ -6,6 +6,8 @@ import ScrollTriggeredCounter from '@/components/ui/ScrollTriggeredCounter';
 import TestimonialsCarousel from '@/components/ui/TestimonialsCarousel';
 import SecurityPrivacy from '@/components/sections/SecurityPrivacy';
 import useScrollTrigger from '@/hooks/useScrollTrigger';
+import { text } from 'stream/consumers';
+import { Value } from '@radix-ui/react-select';
 
 const Home = () => {
   const [typedText, setTypedText] = useState('');
@@ -80,10 +82,10 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: 95, suffix: '%', label: '1 in 4 people experiences mental health issues', icon: TrendingUp },
-    { number: 50000, suffix: '+', label: 'Suicide is the 2nd leading cause of death among 15–29-year-olds', icon: Skull },
-    { number: 200, suffix: '+', label: 'Untreated mental disorders cost the global economy $1 trillion/year in productivity losses', icon: CircleDollarSignIcon },
-    { number: 15, suffix: '', label: 'Theres also a severe shortage of trained psychologists and psychiatrists, especially in developing regions.', icon: Award },
+    { value: '25%' , label: '1 in 4 people experiences mental health issues', icon: TrendingUp },
+    { value: '127K+', label: 'Suicide is the 2nd leading cause of death among 15–29-year-olds', icon: Skull },
+    { value: '100B+' , label: 'Untreated mental disorders cost the global economy $1 trillion/year in productivity losses', icon: CircleDollarSignIcon },
+    { value: '15', label: 'Theres also a severe shortage of trained psychologists and psychiatrists, especially in developing regions.', icon: Award },
   ];
 
   return (
@@ -125,24 +127,31 @@ const Home = () => {
 
       {/* Stats Section */}
       <section className="py-20 neural-bg relative z-10">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text"> Need of Mannora</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-16">Real impact, real results, real change in mental healthcare</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 glow-effect">
-                  <stat.icon className="h-10 w-10 text-white" />
-                </div>
-                <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">
-                  <ScrollTriggeredCounter end={stat.number} suffix={stat.suffix} className="inline-block" />
-                </div>
-                <p className="text-muted-foreground font-medium">{stat.label}</p>
-              </div>
-            ))}
+  <div className="container mx-auto px-4 text-center">
+    <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Need of Mannora</h2>
+    <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-16">
+      Real impact, real results, real change in mental healthcare
+    </p>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {stats.map((stat, index) => (
+        <div
+          key={index}
+          className="text-center transform transition duration-300 hover:scale-105 hover:-translate-y-2"
+        >
+          <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 glow-effect transition duration-300 hover:shadow-[0_0_20px_rgba(0,200,255,0.6)]">
+            <stat.icon className="h-10 w-10 text-white transition duration-300 group-hover:scale-110" />
           </div>
+          <div className="text-4xl md:text-5xl font-bold gradient-text mb-2 transition duration-300 hover:text-white">
+            {stat.value}
+          </div>
+          <p className="text-muted-foreground font-medium transition duration-300 hover:text-white">
+            {stat.label}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Features Section */}
       <section className="py-20 bg-background relative z-10">
